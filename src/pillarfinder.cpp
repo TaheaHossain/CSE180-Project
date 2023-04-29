@@ -39,21 +39,17 @@ int main(int argc,char **argv) {
     // busy waiting for task to be completed
   }
   geometry_msgs::msg::Pose::SharedPtr goal_pos = std::make_shared<geometry_msgs::msg::Pose>();
-  goal_pos->position.x = 2;
-  goal_pos->position.y = 1;
+  for(float y = 1.5; y >= -1.5; y--){
+    for(float x = -2; x<= 2; x++){
+  goal_pos->position.x = x;
+  goal_pos->position.y = y;
   goal_pos->orientation.w = 1;
   // move to new pose
   navigator.GoToPose(goal_pos);
   while ( ! navigator.IsTaskComplete() ) {
     
   }
-  goal_pos->position.x = 2;
-  goal_pos->position.y = -1;
-  goal_pos->orientation.w = 1;
-  navigator.GoToPose(goal_pos);
-  // move to new pose
-  while ( ! navigator.IsTaskComplete() ) {
-    
+    }
   }
   // backup of 0.15 m (deafult distance)
   navigator.Backup();
